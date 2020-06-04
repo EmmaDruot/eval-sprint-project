@@ -1,10 +1,11 @@
 
 body {
-  background-image:  url('imgs/photoPlanete.jpg');
+  background-image: url('imgs/photoPlanete.jpg');
   color: white;
   font-family: "Roboto", sans-serif;
   font-weight: normal;
   text-align:center; 
+  overflow: hidden;
 }
 
 h1 {
