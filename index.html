@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mars weather</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   
+<h1> MARS </h1>
+<h2>Voici une comparaison de la température sur Mars et sur la Terre actuellement</h2>
+    <main>
+     <div class="date">
+        <p class="date_day" data-current-date></p>
+     </div>
+
+    <div id="container">
+        <div class="temp">
+            <img src="imgs/mars.png" id="img-mars">
+            <div class="titre" id="div-mars">
+                <h3 class="section-title">Temperature de Mars:</h3>
+                <p id="mars">
+                 <span data-current-temp></span>°<span>C</span>
+                </p>
+            </div>
+        </div>
+
+    <button class="compare" onclick="earthWeather()">Comparer</button>
+
+        <div class="earth-current-weather">
+            <img src="imgs/terre.png" id="img-terre">
+            <div class="titre" id="div-terre">
+                <h3 class="section-title">Temperature de la Terre:</h3>
+                <p id="terre">
+                 <span id="earth"></span>°<span>C</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    </main>
+
+    <button href="#" class="modal-trigger" onclick="popup()">Created by Emma Druot</button> 
+
+</body>
+
+
+<script type="text/javascript">
+    const API_KEY = 'CYf65Fe2w1LbvZSijXPp01f1h4G67MzskfanMZr2';
+    const API_URL = "https://api.nasa.gov/insight_weather/?api_key="+ API_KEY + "&feedtype=json&ver=1.0";
+    
+    const currentDateElement = document.querySelector('[data-current-date]');
+    const currentTempElement = document.querySelector('[data-current-temp]');
+
+    let selectedSolIndex;
+
+    getWeather().then(sols => {
+        selectedSolIndex = sols.length - 1;
+        displaySelectedSol(sols);
+    });
+
+    function displaySelectedSol(sols) {
+        const selectedSol = sols[selectedSolIndex];
+        currentDateElement.innerText = displayDate(selectedSol.date);
+        currentTempElement.innerText = displayTemperature(selectedSol.Temp);
+    }
+
+    function displayDate(date) {
+        return date.toLocaleDateString(
+            undefined,
+            { day: 'numeric', month: 'long' }
+        )
+    }
+
+    function displayTemperature(temperature) {
+        return Math.round(temperature)
+    }
+
+    function getWeather() {
+        return fetch(API_URL)
+            .then(res => res.json())
+            .then(data => {
+                const {
+                    sol_keys,
+                    validity_checks,
+                    ...solData
+                } = data
+                return Object.entries(solData).map(([sol, data]) => {
+                    return {
+                        Temp: data.AT.av,
+                        date: new Date(data.Last_UTC)
+                    }
+                })
+            })
+    }
+
+    var callBackGetSuccess = function(data) {
+        console.log("donnees api", data)
+        var element = document.getElementById("earth");
+        element.innerHTML = data.main.temp;
+    };
+
+/*button comparer*/
+    function earthWeather() {
+        var queryLoc = "Paris,fr";
+
+        var url = "https://api.openweathermap.org/data/2.5/weather?q=Paris,fr&appid=c21a75b667d6f7abb81f118dcf8d4611&units=metric"
+
+        $.get(url, callBackGetSuccess).done(function() {
+        })
+            .fail(function() {
+                alert( "error" );
+            })
+            .always(function() {
+                //alert( "finished" );
+            });
+    }
+
+/*Pop-up*/
+
+function popup(){
+  alert("Je vous présente mon projet qui permet d'avoir la température actuelle sur Mars et de la comparer avec la température sur la Terre!");
+}
+
+</script>
+</html>

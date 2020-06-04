@@ -1,0 +1,112 @@
+
+body {
+  background-image:  url('imgs/photoPlanete.jpg');
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  text-align:center; 
+}
+
+h1 {
+  font-size: 80px ;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+p {
+  line-height: 1.4em;
+  color: white;
+}
+  
+#container {
+  display: flex;
+  justify-content: space-around;
+}
+
+#img-mars{
+  position: absolute;
+  right: 75%;
+  width: 20%;
+  z-index: -1000
+}
+
+.titre{
+  position: absolute;
+  top: 50%;
+  width: 250px;
+  height: 100%;
+}
+
+#div-mars{
+  right: 76%;
+}
+
+.section-title{
+  position: absolute;
+}
+
+#mars{
+  position: absolute;
+  bottom: 88%;
+  right: 55%;
+}
+
+.compare {
+  text-align: center;
+  background-color:whitesmoke;
+  color: black;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+#img-terre{
+  position: absolute;
+  left: 75%;
+  width: 20%;
+  z-index: -1000
+}
+
+#div-terre{
+  left: 78%;
+}
+
+#terre{
+  position: absolute;
+  bottom: 88%;
+  left: 55%;
+}
+
+.modal-trigger, button {
+  top: 50%;
+  left: 50%;
+  padding: 20px 40px;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  text-decoration: none;
+}
+  
+.modal-trigger {
+  cursor: pointer;
+  position: absolute;
+  top: 90%;
+  left: 84%;
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
